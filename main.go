@@ -34,13 +34,13 @@ func main() {
 }
 
 func welcome() {
-	fmt.Println("*******{Welcome to the atm CLI app}********")
+	fmt.Println("🙏🏾🙏🏾🙏🏾🙏🏾 Welcome to Hussain atm CLI app where banking is flawless. 🙏🏾🙏🏾🙏🏾🙏🏾")
 	newLine(1)
 }
 
 func mainMenu() {
 	newLine(1)
-	fmt.Println("Select operation")
+	fmt.Println("Select operation:")
 	fmt.Println("1. Change pin \t")
 	fmt.Println("2. Check account balance \t")
 	fmt.Println("3. Withdraw money \t")
@@ -70,56 +70,60 @@ func mainMenu() {
 }
 
 func changePin() {
-	fmt.Println("Please enter your new pin")
+	newLine(1)
+	fmt.Println("Please enter your new pin 🔐:")
 	var newPin int
 	_, err := fmt.Scan(&newPin)
 	if err != nil {
-		fmt.Println("Error: Invalid input")
+		fmt.Println("Error: Invalid input ‽")
 	}
 	pin = newPin
-	fmt.Println("Pin changed successfully")
+	fmt.Println("Pin changed successfully 😀")
 	mainMenu()
 }
 
-//check account balance
+// check account balance
 func checkAccountBalance() {
+	newLine(1)
 	fmt.Println("Your account balance is: ", accountBalance)
 	mainMenu()
 }
 
-//withdraw money
+// withdraw money
 func withdrawMoney() {
-	fmt.Println("Enter the amount you want to withdraw")
+	newLine(1)
+	fmt.Println("Enter the amount you want to withdraw 💵:")
 	var amount float64
 	_, err := fmt.Scan(&amount)
 	if err != nil {
-		fmt.Println("Error: Invalid input")
+		fmt.Println("Error: Invalid input ‽")
 	}
 	if amount > accountBalance {
-		fmt.Println("Error: Insufficient funds")
+		fmt.Println("Error: Insufficient funds 🥹")
 	} else {
 		accountBalance -= amount
-		fmt.Println("Withdrawal successful")
+		fmt.Println("Withdrawal successful 🤑")
 	}
 	mainMenu()
 }
 
-//deposit money
+// DepositMoney deposit money
 func DepositMoney() {
-	fmt.Println("Enter the amount you want to deposit")
+	newLine(1)
+	fmt.Println("Enter the amount you want to deposit:")
 	var amount float64
 	_, err := fmt.Scan(&amount)
 	if err != nil {
 		fmt.Println("Error: Invalid input")
 	}
 	accountBalance += amount
-	fmt.Println("Deposit successful")
+	fmt.Println("Deposit successful 🤑")
 	mainMenu()
 }
 
-//exit program
+// exit program
 func exitProgram() {
-	fmt.Println("Thanks for banking with us")
+	fmt.Println("Thanks for banking with us 🤝")
 	os.Exit(0)
 }
 
