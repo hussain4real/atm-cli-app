@@ -1,20 +1,51 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 var menuNumber int
+var pin = 0000
+var accountBalance = 1000.00
 
 func main() {
-	fmt.Println("hello world")
+	welcome()
+	//create a prompt for the user to enter their pin
+	fmt.Println("Please enter your pin")
+	//scan the pin
+	_, err := fmt.Scan(&pin)
+	if err != nil {
+		return
+	}
+	//check if the pin is correct
+	if pin == 0000 {
+		//if the pin is correct, run the main menu
+		mainMenu()
+	} else {
+		//if the pin is incorrect, print an error message
+		fmt.Println("Error: Incorrect pin")
+		//run the main function again
+		main()
+		//if the user enters the pin incorrectly 3 times, display an error message and exit the program
+
+	}
+
 }
+
+func welcome() {
+	fmt.Println("*******{Welcome to the atm CLI app}********")
+	newLine(1)
+}
+
 func mainMenu() {
 	newLine(1)
 	fmt.Println("Select operation")
-	fmt.Println("1. Create Todo \t")
-	fmt.Println("2. List Todo Item \t")
-	fmt.Println("3. Edit Todo Item \t")
-	fmt.Println("4. Delete Todo item")
-	fmt.Println("0. Exit the program")
+	fmt.Println("1. Change pin \t")
+	fmt.Println("2. Check account balance \t")
+	fmt.Println("3. Withdraw money \t")
+	fmt.Println("4. Deposit money")
+	fmt.Println("0. Cancel/Exit the program")
 	_, err := fmt.Scan(&menuNumber)
 
 	if err != nil {
@@ -24,18 +55,72 @@ func mainMenu() {
 
 	switch menuNumber {
 	case 1:
-		createTodo()
+		changePin()
 	case 2:
-		listTodo()
+		checkAccountBalance()
 	case 3:
-		updateTodo()
+		withdrawMoney()
 	case 4:
-		deleteTodo()
+		DepositMoney()
 	case 0:
 		exitProgram()
 	default:
 		fmt.Println("Error: Invalid input")
 	}
+}
+
+func changePin() {
+	fmt.Println("Please enter your new pin")
+	var newPin int
+	_, err := fmt.Scan(&newPin)
+	if err != nil {
+		fmt.Println("Error: Invalid input")
+	}
+	pin = newPin
+	fmt.Println("Pin changed successfully")
+	mainMenu()
+}
+
+//check account balance
+func checkAccountBalance() {
+	fmt.Println("Your account balance is: ", accountBalance)
+	mainMenu()
+}
+
+//withdraw money
+func withdrawMoney() {
+	fmt.Println("Enter the amount you want to withdraw")
+	var amount float64
+	_, err := fmt.Scan(&amount)
+	if err != nil {
+		fmt.Println("Error: Invalid input")
+	}
+	if amount > accountBalance {
+		fmt.Println("Error: Insufficient funds")
+	} else {
+		accountBalance -= amount
+		fmt.Println("Withdrawal successful")
+	}
+	mainMenu()
+}
+
+//deposit money
+func DepositMoney() {
+	fmt.Println("Enter the amount you want to deposit")
+	var amount float64
+	_, err := fmt.Scan(&amount)
+	if err != nil {
+		fmt.Println("Error: Invalid input")
+	}
+	accountBalance += amount
+	fmt.Println("Deposit successful")
+	mainMenu()
+}
+
+//exit program
+func exitProgram() {
+	fmt.Println("Thanks for banking with us")
+	os.Exit(0)
 }
 
 func newLine(numberOfLines int) {
