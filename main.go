@@ -79,14 +79,14 @@ func changePin() {
 	}
 	pin = newPin
 	fmt.Println("Pin changed successfully 😀")
-	mainMenu()
+	performAnotherOperation()
 }
 
 // check account balance
 func checkAccountBalance() {
 	newLine(1)
 	fmt.Println("Your account balance is: ", accountBalance)
-	mainMenu()
+	performAnotherOperation()
 }
 
 // withdraw money
@@ -104,7 +104,7 @@ func withdrawMoney() {
 		accountBalance -= amount
 		fmt.Println("Withdrawal successful 🤑")
 	}
-	mainMenu()
+	performAnotherOperation()
 }
 
 // DepositMoney deposit money
@@ -118,7 +118,23 @@ func DepositMoney() {
 	}
 	accountBalance += amount
 	fmt.Println("Deposit successful 🤑")
-	mainMenu()
+	performAnotherOperation()
+}
+
+func performAnotherOperation() {
+	fmt.Println("Do you want to perform another operation? (Y/N)")
+	var answer string
+	_, err := fmt.Scan(&answer)
+	if err != nil {
+		fmt.Println("Error: Invalid input")
+	}
+	if answer == "Y" {
+		mainMenu()
+	} else if answer == "N" {
+		exitProgram()
+	} else {
+		fmt.Println("Error: Invalid input")
+	}
 }
 
 // exit program
